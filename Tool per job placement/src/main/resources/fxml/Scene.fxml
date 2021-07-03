@@ -2,7 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Slider?>
@@ -32,8 +32,16 @@
                <tabs>
                   <Tab text="Student side">
                      <content>
-                        <VBox prefWidth="188.0">
+                        <VBox onDragDetected="#stopCV" prefWidth="188.0">
                            <children>
+                              <Label text="Curriculum Vitae">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="30.0" top="20.0" />
+                                 </VBox.margin>
+                              </Label>
                               <GridPane>
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -41,27 +49,90 @@
                                 </columnConstraints>
                                 <rowConstraints>
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Label text="Choose a skill" />
-                                    <ChoiceBox fx:id="boxSkills" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                                    <Label text="Bachelor degree">
                                        <GridPane.margin>
-                                          <Insets right="10.0" />
+                                          <Insets left="30.0" />
                                        </GridPane.margin>
-                                    </ChoiceBox>
+                                    </Label>
+                                    <Label text="Master degree" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets left="30.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <ComboBox fx:id="boxBachelorUni" prefWidth="300.0" GridPane.columnIndex="1" />
+                                    <ComboBox fx:id="boxMasterUni" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label text="Best skill" GridPane.rowIndex="2">
+                                       <GridPane.margin>
+                                          <Insets left="30.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <ComboBox fx:id="boxSkills" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                  </children>
                                  <VBox.margin>
-                                    <Insets bottom="15.0" top="15.0" />
+                                    <Insets bottom="20.0" top="20.0" />
                                  </VBox.margin>
                               </GridPane>
-                              <Button mnemonicParsing="false" onAction="#doFindJobs" text="Find jobs">
+                              <Label text="Job Characteristics">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="30.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <GridPane>
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label text="Functional area">
+                                       <GridPane.margin>
+                                          <Insets left="30.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label text="Industry" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets left="30.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <ComboBox fx:id="boxFunctionalArea" onAction="#stopCV" prefWidth="300.0" GridPane.columnIndex="1" />
+                                    <ComboBox fx:id="boxIndustry" onAction="#stopCV" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" top="20.0" />
+                                 </VBox.margin>
+                              </GridPane>
+                              <GridPane>
                                  <VBox.margin>
                                     <Insets bottom="10.0" left="5.0" />
                                  </VBox.margin>
-                              </Button>
-                              <TextArea fx:id="txtResult" prefHeight="200.0" prefWidth="200.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#doFindJobs" text="Find jobs" GridPane.halignment="RIGHT">
+                                       <GridPane.margin>
+                                          <Insets right="40.0" />
+                                       </GridPane.margin>
+                                    </Button>
+                                 </children>
+                              </GridPane>
+                              <TextArea fx:id="txtResult" prefHeight="250.0" prefWidth="200.0">
                                  <VBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                    <Insets left="25.0" right="40.0" top="20.0" />
                                  </VBox.margin>
                               </TextArea>
                            </children>
@@ -107,15 +178,22 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <ChoiceBox fx:id="languageBox" layoutX="82.0" layoutY="300.0" prefWidth="150.0" />
                               <Label layoutX="35.0" layoutY="367.0" text="Select the main subject requirement">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <ChoiceBox fx:id="mainSubjectBox" layoutX="82.0" layoutY="412.0" prefWidth="150.0" />
-                              <Button layoutX="720.0" layoutY="495.0" mnemonicParsing="false" onAction="#doFindUniversities" text="Find universities" />
-                              <TextArea fx:id="resultUniversitiesTxt" layoutX="53.0" layoutY="578.0" prefHeight="248.0" prefWidth="774.0" />
+                              <Button layoutX="722.0" layoutY="665.0" mnemonicParsing="false" onAction="#doFindUniversities" text="Find universities" />
+                              <TextArea fx:id="resultUniversitiesTxt" layoutX="25.0" layoutY="720.0" prefHeight="250.0" prefWidth="801.0" />
+                              <ComboBox fx:id="languageBox" layoutX="39.0" layoutY="303.0" prefWidth="150.0" />
+                              <ComboBox fx:id="mainSubjectBox" layoutX="38.0" layoutY="415.0" prefWidth="200.0" />
+                              <Label layoutX="38.0" layoutY="492.0" text="Select the position on offer">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="41.0" layoutY="534.0" text="By selecting the position of offer, there will be no need for the previous input value, except for the language requirement" />
+                              <ComboBox fx:id="boxJobOnOffer" layoutX="38.0" layoutY="581.0" onAction="#noRecruiterInput" prefWidth="300.0" />
                            </children>
                         </AnchorPane>
                     </content>
