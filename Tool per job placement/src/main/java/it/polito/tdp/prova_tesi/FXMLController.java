@@ -110,7 +110,8 @@ public class FXMLController {
     	}
     	
     	for(Job j : bestJobs) {
-    		this.txtResult.appendText(j+"\n");
+    		this.txtResult.appendText("Here are the most suitable job offers according to your own interests\n");
+    		this.txtResult.appendText(j+"\n\n");
     	}
     }
 
@@ -122,17 +123,16 @@ public class FXMLController {
     		this.resultUniversitiesTxt.appendText("You didn't select any language\n");
     		return;
     	}
-    	String subject = this.mainSubjectBox.getValue();
-    	if(subject==null) {
-    		this.resultUniversitiesTxt.appendText("You didn't select a main subject\n");
-    		return;
-    	}
-    	this.resultUniversitiesTxt.appendText("Calculating best universities...\n");
-    	this.resultUniversitiesTxt.appendText("There are "+this.model.getValidUniversitiesNumber(language)+" universities that respect the language criteria\n");
+    	//this.resultUniversitiesTxt.appendText("There are "+this.model.getValidUniversitiesNumber(language)+" universities that respect the language criteria\n");
     	Job jobOnOffer = this.boxJobOnOffer.getValue();
     	
     	List<University> bestUniversities = new LinkedList<>();
     	if(jobOnOffer==null) {
+    		String subject = this.mainSubjectBox.getValue();
+        	if(subject==null) {
+        		this.resultUniversitiesTxt.appendText("You didn't select a main subject\n");
+        		return;
+        	}
     		bestUniversities = this.model.getBestUniversities(language, subject, (int)artsAndHumanitiesSlider.getValue(), (int)engineeringAndTechnologySlider.getValue(), 
 					(int)lifeSciencesAndMedicineSlider.getValue(), (int)naturalSciencesSlider.getValue(), (int)socialSciencesAndManagementSlider.getValue());
     		
@@ -141,9 +141,9 @@ public class FXMLController {
     	}
     	
     	if(bestUniversities==null) {
-    		this.resultUniversitiesTxt.appendText("Errore nella ricerca\n");
+    		this.resultUniversitiesTxt.appendText("Oh no! Something went wrong\n");
     	}else {
-    		
+    		this.resultUniversitiesTxt.appendText("Here are the best 5 universities that will provide suitable candidates for the position you are offering:\n");
     		for(University u : bestUniversities) {
         		this.resultUniversitiesTxt.appendText(u.toStringRes()+"\n");
         	}
@@ -203,6 +203,9 @@ public class FXMLController {
     
     public void setModel(Model model) {
     	this.model = model;
+    	
+    	this.txtResult.setStyle("-fx-font-family: monospace");
+    	this.resultUniversitiesTxt.setStyle("-fx-font-family: monospace");
     	
     	this.boxSkills.getItems().addAll(this.model.getAllSkills());
     	this.languageBox.getItems().addAll(this.model.getLanguages());

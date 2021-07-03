@@ -69,7 +69,7 @@ public class Job implements Comparable<Job>{
 
 	@Override
 	public String toString() {
-		return "JOB TITLE: " + Job_Title + " ROLE: " + Role;
+		return "JOB TITLE: " + Job_Title + "\nROLE: " + Role;
 	}
 
 	@Override
