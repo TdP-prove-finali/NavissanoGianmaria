@@ -1,4 +1,4 @@
-package it.polito.tdp.prova_tesi.model;
+package model;
 
 public class Job implements Comparable<Job>{
 	

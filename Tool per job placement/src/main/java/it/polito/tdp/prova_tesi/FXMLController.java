@@ -5,14 +5,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import it.polito.tdp.prova_tesi.model.Job;
-import it.polito.tdp.prova_tesi.model.Model;
-import it.polito.tdp.prova_tesi.model.University;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
+import model.Job;
+import model.Model;
+import model.University;
 
 public class FXMLController {
 	

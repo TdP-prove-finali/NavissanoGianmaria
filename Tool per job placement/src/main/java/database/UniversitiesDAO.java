@@ -1,4 +1,4 @@
-package it.polito.tdp.prova_tesi.db;
+package database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import it.polito.tdp.prova_tesi.model.University;
+import model.University;
 
 public class UniversitiesDAO {
 	

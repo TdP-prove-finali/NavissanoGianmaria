@@ -1,4 +1,4 @@
-package it.polito.tdp.prova_tesi.model;
+package model;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import it.polito.tdp.prova_tesi.db.JobsDAO;
-import it.polito.tdp.prova_tesi.db.UniversitiesDAO;
+import database.JobsDAO;
+import database.UniversitiesDAO;
 
 public class Model {
 	

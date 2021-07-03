@@ -1,4 +1,4 @@
-package it.polito.tdp.prova_tesi.db;
+package database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-import it.polito.tdp.prova_tesi.model.Job;
+import model.Job;
 
 public class JobsDAO {
 	

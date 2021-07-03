@@ -1,4 +1,4 @@
-package it.polito.tdp.prova_tesi.model;
+package model;
 
 import java.util.LinkedList;
 import java.util.List;
