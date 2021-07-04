@@ -21,7 +21,7 @@
    <top>
       <Label text="Tool per job placement" BorderPane.alignment="CENTER">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="Arial Black" size="36.0" />
          </font>
       </Label>
    </top>
@@ -192,7 +192,7 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="41.0" layoutY="534.0" text="By selecting the position of offer, there will be no need for the previous input value, except for the language requirement" />
+                              <Label layoutX="42.0" layoutY="516.0" text="By selecting the position on offer, there will be no need for the previous input values, except for the language requirement" />
                               <ComboBox fx:id="boxJobOnOffer" layoutX="38.0" layoutY="581.0" onAction="#noRecruiterInput" prefWidth="300.0" />
                            </children>
                         </AnchorPane>

@@ -32,8 +32,8 @@ public class Model {
 		this.langMap = this.setLanguages(this.uniDao.getAllCountries());
 		
 		//inizializzo l'elenco di università
-		this.uniDao.getAllUniversities(idMapUni);
-		this.uniDao.getMacroSubjectsRankings(idMapUni);
+		this.uniDao.setAllUniversities(idMapUni);
+		this.uniDao.setMacroSubjectsRankings(idMapUni);
 		this.uniDao.setAllSubjects(idMapUni);
 		
 		//inizializzo i jobs
@@ -84,23 +84,10 @@ public class Model {
 		return result;
 	}
 	
-	public String getJobsBySkill(String skill){
-		List<String> jobs = this.jobsDao.getJobBySkill(skill);
-		String result = "";
-		for(String s : jobs) {
-			result += s+"\n";
-		}
-		return result;
-	}
-	
 	public List<String> getLanguages(){
 		List<String> result = new LinkedList<>(this.langMap.keySet());
 		Collections.sort(result);
 		return result;
-	}
-	
-	public Language getCountriesByLanguage(String lang){
-		return this.langMap.get(lang);
 	}
 	
 	public void setValidUniversities(String language){
@@ -225,20 +212,23 @@ public class Model {
 		
 	}
 	
-	public double calcolaScore(University u, int artsAndHumanitiesValue, int engineeringAndTechnologyValue, int lifeSciencesAndMedicineValue, 
+	public double calcolaScore(University u, int artsAndHumanitiesValue, 
+			int engineeringAndTechnologyValue, int lifeSciencesAndMedicineValue, 
 			int naturalSciencesValue, int socialSciencesAndManagementValue, String subject) {
 		
 		
 		double score = 0.0;
+		
+		int multi = 1000; //moltiplicatore
 			
 		//il punteggio è dato dalla somma del ranking generico, dato dall'overall score
 		score += u.getOverall_Score();
 		
 		//a cui va sommato il punteggio dato dalla Main Subject
-		score += (double)u.getSubject(subject);
+		if(u.getSubject(subject)>0)
+			score += (double)multi*(1.0/(double)u.getSubject(subject));
 		
 		//e dalla somma dei rankings per Macro-subject
-		int multi = 1000; //moltiplicatore
 		
 		if(u.getArts_And_Humanitites_Rank()>0) {
 			score += (double)multi*(double)artsAndHumanitiesValue*(1.0/(double)u.getArts_And_Humanitites_Rank());
@@ -412,13 +402,6 @@ public class Model {
 		return result;
 		
 	}
-	
-	
-	public int getValidUniversitiesNumber(String language) {
-		this.setValidUniversities(language);
-		return this.validUniversities.size();
-	}
-	
 	
 	public List<String> getSubjectByIndustryAndFunctionalArea(String industry, String functional_Area){
 	

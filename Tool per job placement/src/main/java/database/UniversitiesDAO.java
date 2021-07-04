@@ -35,7 +35,7 @@ public class UniversitiesDAO {
 		}
 	}
 	
-	public void getAllUniversities(Map<String, University> idMap) {
+	public void setAllUniversities(Map<String, University> idMapUni) {
 		String sql="select ranking_2019, institution_name, country, overall_score\n"
 				+ "from qsuniversityrankings\n"
 				+ "where institution_name is not null and ranking_2019 <>'N/A'";
@@ -46,7 +46,7 @@ public class UniversitiesDAO {
 			ResultSet rs = st.executeQuery();
 			
 			while(rs.next()) {
-				if(!idMap.containsKey(rs.getString("institution_name"))) {
+				if(!idMapUni.containsKey(rs.getString("institution_name"))) {
 					
 					int ranking = 0;
 					double score = 0.0;
@@ -128,7 +128,7 @@ public class UniversitiesDAO {
 					//Dopo il controllo sui dati posso aggiungere l'università alla lista
 					if(score!=0 && ranking!=0) {
 						University uni = new University(ranking, rs.getString("institution_name"), rs.getString("country"), score);
-						idMap.put(uni.getInstitution_Name(), uni);
+						idMapUni.put(uni.getInstitution_Name(), uni);
 					}
 					
 					
@@ -145,16 +145,17 @@ public class UniversitiesDAO {
 		
 		
 	}
-	public void getMacroSubjectsRankings(Map<String, University> idMap) {
-		this.getArtAndHumanitiesRank(idMap);
-		this.getEngineeringAndTechnologyRank(idMap);
-		this.getLifeSciencesAndTechnologyRank(idMap);
-		this.getNaturalSciencesRank(idMap);
-		this.getSocialSciencesAndManagementRank(idMap);
+	
+	public void setMacroSubjectsRankings(Map<String, University> idMapUni) {
+		this.setArtAndHumanitiesRank(idMapUni);
+		this.setEngineeringAndTechnologyRank(idMapUni);
+		this.setLifeSciencesAndTechnologyRank(idMapUni);
+		this.setNaturalSciencesRank(idMapUni);
+		this.setSocialSciencesAndManagementRank(idMapUni);
 	}
 	
 	
-	public void getArtAndHumanitiesRank(Map<String, University> idMap) {
+	public void setArtAndHumanitiesRank(Map<String, University> idMapUni) {
 		String sql = "SELECT q.institution_name, a.rank "
 				+ "FROM qsuniversityrankings q, Arts_And_Humanities a "
 				+ "WHERE q.institution_name IS NOT NULL AND q.ranking_2019 <>'N/A' "
@@ -166,10 +167,10 @@ public class UniversitiesDAO {
 			
 
 			while(rs.next()) {
-				if(idMap.containsKey(rs.getString("q.institution_name"))) {
+				if(idMapUni.containsKey(rs.getString("q.institution_name"))) {
 					
 					
-					University u = idMap.get(rs.getString("q.institution_name"));
+					University u = idMapUni.get(rs.getString("q.institution_name"));
 					u.setArts_And_Humanitites_Rank(rs.getInt("a.rank"));
 					
 				}
@@ -182,7 +183,7 @@ public class UniversitiesDAO {
 		}
 	}
 	
-	public void getEngineeringAndTechnologyRank(Map<String, University> idMap) {
+	public void setEngineeringAndTechnologyRank(Map<String, University> idMapUni) {
 		String sql = "SELECT q.institution_name, e.rank "
 				+ "FROM qsuniversityrankings q, Engineering_And_Technology e "
 				+ "WHERE q.institution_name IS NOT NULL AND q.ranking_2019 <>'N/A' "
@@ -194,10 +195,10 @@ public class UniversitiesDAO {
 			
 
 			while(rs.next()) {
-				if(idMap.containsKey(rs.getString("q.institution_name"))) {
+				if(idMapUni.containsKey(rs.getString("q.institution_name"))) {
 					
 					
-					University u = idMap.get(rs.getString("q.institution_name"));
+					University u = idMapUni.get(rs.getString("q.institution_name"));
 					u.setEngineering_And_Technology_Rank(rs.getInt("e.rank"));
 					
 				}
@@ -210,7 +211,7 @@ public class UniversitiesDAO {
 		}
 	}
 	
-	public void getLifeSciencesAndTechnologyRank(Map<String, University> idMap) {
+	public void setLifeSciencesAndTechnologyRank(Map<String, University> idMapUni) {
 		String sql = "SELECT q.institution_name, l.rank "
 				+ "FROM qsuniversityrankings q, Life_Sciences_And_Technology l "
 				+ "WHERE q.institution_name IS NOT NULL AND q.ranking_2019 <>'N/A' "
@@ -222,10 +223,10 @@ public class UniversitiesDAO {
 			
 
 			while(rs.next()) {
-				if(idMap.containsKey(rs.getString("q.institution_name"))) {
+				if(idMapUni.containsKey(rs.getString("q.institution_name"))) {
 					
 					
-					University u = idMap.get(rs.getString("q.institution_name"));
+					University u = idMapUni.get(rs.getString("q.institution_name"));
 					u.setLife_Sciences_And_Technology_Rank(rs.getInt("l.rank"));
 					
 				}
@@ -238,7 +239,7 @@ public class UniversitiesDAO {
 		}
 	}
 	
-	public void getNaturalSciencesRank(Map<String, University> idMap) {
+	public void setNaturalSciencesRank(Map<String, University> idMapUni) {
 		String sql = "SELECT q.institution_name, n.rank "
 				+ "FROM qsuniversityrankings q, Natural_Sciences n "
 				+ "WHERE q.institution_name IS NOT NULL AND q.ranking_2019 <>'N/A' "
@@ -249,10 +250,10 @@ public class UniversitiesDAO {
 			ResultSet rs = st.executeQuery();
 
 			while(rs.next()) {
-				if(idMap.containsKey(rs.getString("q.institution_name"))) {
+				if(idMapUni.containsKey(rs.getString("q.institution_name"))) {
 					
 					
-					University u = idMap.get(rs.getString("q.institution_name"));
+					University u = idMapUni.get(rs.getString("q.institution_name"));
 					u.setNatural_Sciences_Rank(rs.getInt("n.rank"));
 					
 				}
@@ -265,7 +266,7 @@ public class UniversitiesDAO {
 		}
 	}
 	
-	public void getSocialSciencesAndManagementRank(Map<String, University> idMap) {
+	public void setSocialSciencesAndManagementRank(Map<String, University> idMapUni) {
 		String sql = "SELECT q.institution_name, s.rank "
 				+ "FROM qsuniversityrankings q, Social_Sciences_And_Management s "
 				+ "WHERE q.institution_name IS NOT NULL AND q.ranking_2019 <>'N/A' "
@@ -276,10 +277,10 @@ public class UniversitiesDAO {
 			ResultSet rs = st.executeQuery();
 			
 			while(rs.next()) {
-				if(idMap.containsKey(rs.getString("q.institution_name"))) {
+				if(idMapUni.containsKey(rs.getString("q.institution_name"))) {
 					
 					
-					University u = idMap.get(rs.getString("q.institution_name"));
+					University u = idMapUni.get(rs.getString("q.institution_name"));
 					u.setSocial_Sciences_And_Management_Rank(rs.getInt("s.rank"));
 					
 					
@@ -292,34 +293,8 @@ public class UniversitiesDAO {
 			e.printStackTrace();
 		}
 	}
-
-	/*public int getSubjectScore(String subject, University uni) {
-		String sql = "SELECT u.Institution_Name, s.Accounting_and_Finance as 'Accounting and Finance', s.`Agriculture_&_Forestry` as 'Agriculture & Forestry', s.`Anatomy_&_Physiology` as 'Anatomy & Physiology', s.Anthropology as 'Anthropology', s.Archaeology as 'Archaeology', s.`Architecture_&_Built_Environment` as 'Architecture & Built Environment', s.`Art_&_Design` as 'Art & Design', s.Biological_Sciences as 'Biological Sciences', s.`Business_&_Management_Studies` as 'Business & Management Studies', s.Chemistry as 'Chemistry', s.`Classics_&_Ancient_History` as 'Classics & Ancient History', s.Communication_and_Media_Studies as 'Communication and Media Studies', s.Computer_Science_and_Information as 'Computer Science and Information', s.Dentistry as 'Dentistry', s.Developement_studies as 'Developement Studies', s.Economics_and_Econometrics as 'Economics and Econometrics', s.Education_and_Training as 'Education and Training', s.`Electrical_&_Electronic_Engineering` as 'Electrical & Electronic Engineering', s.Engineering_Chemical as 'Engineering Chemical', s.`English_Language_&_Literature` as 'English Language & Literature', s.Environmental_Sciences as 'Environmental Sciences', s.Geography as 'Geography', s.History as 'History', s.`Hospitality_&_Leisure_Management` as 'Hospitality & Leisure Management', s.`Law_&_Legal_Studies` as 'Law & Legal Studies', s.`Library_&_Information_Management` as 'Library & Information Management', s.Linguistics as 'Linguistics', s.Materials_Sciences as 'Materials Sciences', s.Mathematics as 'Mathematics', s.Mechanical_Aeronautical_and_Manufacturing_Engineering as 'Mechanical Aeronautical and Manufacturing Engineering', s.Medicine as 'Medicine', s.`Mineral_&_Mining_Engineering` as 'Mineral & Mining Engineering', s.Modern_Languages as 'Modern Languages', s.Nursing as 'Nursing', s.Performing_Arts as 'Performing Arts', s.`Pharmacy_&_Pharmacology` as 'Pharmacy & Pharmacology', s.Philosophy as 'Philosophy', s.`Physics_&_Astronomy` as 'Physics & Astronomy', s.Politics as 'Politics', s.Psychology as 'Psychology', s.`Social_Policy_&_Administration` as 'Social Policy & Administration', s.Sociology as 'Sociology', s.`Sports-related_Subjects` as 'Sports-related Subjects', s.`Statistics_&_Operational_Research` as 'Statistics & Operational Research', s.`Theology_Divinity_&_Religious_Studies` as 'Theology, Divinity & Religious Studies', s.Veterinary_Science as 'Veterinary Science' "
-				+ "FROM University_Rankings_by_Subject s, QSUniversityRankings u "
-				+ "WHERE u.Institution_Name = s.University_Name "
-				+ "AND u.Institution_Name = ?";
-		int res = 0;
-		
-		try {
-			Connection conn = DBConnect.getConnection();
-			PreparedStatement st = conn.prepareStatement(sql);
-			st.setString(1, uni.getInstitution_Name());
-			ResultSet rs = st.executeQuery();
-			
-			while(rs.next()) {
-				res = rs.getInt(subject);
-			}
-			
-			conn.close();
-			return res;
-			
-		} catch(SQLException e) {
-			e.printStackTrace();
-			return 0;
-		}
-	}*/
 	
-	public void setAllSubjects(Map<String, University> idMap) {
+	public void setAllSubjects(Map<String, University> idMapUni) {
 		
 		String sql = "SELECT u.Institution_Name, s.Accounting_and_Finance, s.Agriculture_and_Forestry, s.Anatomy_and_Physiology, s.Anthropology, s.Archaeology, s.Architecture_and_Built_Environment, s.Art_and_Design, s.Biological_Sciences, s.Business_and_Management_Studies, s.Chemistry, s.Classics_and_Ancient_History, s.Communication_and_Media_Studies, s.Computer_Science_and_Information, s.Dentistry, s.Developement_studies, s.Economics_and_Econometrics, s.Education_and_Training, s.Electrical_and_Electronic_Engineering, s.Engineering_Chemical, s.English_Language_and_Literature, s.Environmental_Sciences, s.Geography, s.History, s.Hospitality_and_Leisure_Management, s.Law_and_Legal_Studies, s.Library_and_Information_Management, s.Linguistics, s.Materials_Sciences, s.Mathematics, s.Mechanical_Aeronautical_and_Manufacturing_Engineering, s.Medicine, s.Mineral_and_Mining_Engineering, s.Modern_Languages, s.Nursing, s.Performing_Arts, s.Pharmacy_and_Pharmacology, s.Philosophy, s.Physics_and_Astronomy, s.Politics, s.Psychology, s.Social_Policy_and_Administration, s.Sociology, s.Sports_related_Subjects, s.Statistics_and_Operational_Research, s.Theology_Divinity_and_Religious_Studies, s.Veterinary_Science "
 				+ "FROM University_Rankings_by_Subject s, QSUniversityRankings u "
@@ -330,10 +305,10 @@ public class UniversitiesDAO {
 			ResultSet rs = st.executeQuery();
 			
 			while(rs.next()) {
-				if(idMap.containsKey(rs.getString("u.institution_name"))) {
+				if(idMapUni.containsKey(rs.getString("u.institution_name"))) {
 					
 					
-					University u = idMap.get(rs.getString("u.institution_name"));
+					University u = idMapUni.get(rs.getString("u.institution_name"));
 					
 					u.setAccounting_and_Finance(rs.getInt("s.Accounting_and_Finance"));
 					u.setAgriculture_and_Forestry(rs.getInt("s.Agriculture_and_Forestry"));

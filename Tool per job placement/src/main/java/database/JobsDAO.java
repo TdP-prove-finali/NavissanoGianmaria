@@ -35,30 +35,6 @@ public class JobsDAO {
 		
 	}
 	
-	public List<String> getJobBySkill(String skill){
-		String sql = "select distinct job_title "
-				+ "from jobs "
-				+ "where job_experience_required like '0 -%' and key_skills like ?";
-		List<String> result = new LinkedList<>();
-		
-		try {
-			Connection conn = DBConnect.getConnection();
-			PreparedStatement st = conn.prepareStatement(sql);
-			skill = "%"+skill+"%";
-			st.setString(1, skill);
-			ResultSet rs = st.executeQuery();
-			
-			while(rs.next()) {
-				result.add(rs.getString("job_title"));
-			}
-			conn.close();
-			return result;
-			
-		} catch(SQLException e) {
-			throw new RuntimeException("Error during connection to database", e);
-		}
-	}
-	
 	public List<Job> getAllJobs(){
 		String sql = "SELECT distinct Job_Title, Industry, Functional_Area, Job_Salary, Key_Skills, Role "
 				+ "FROM jobs "

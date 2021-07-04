@@ -109,8 +109,9 @@ public class FXMLController {
     		return;
     	}
     	
+    	this.txtResult.appendText("Here are the most suitable job offers according to your selection\n\n");
+    	
     	for(Job j : bestJobs) {
-    		this.txtResult.appendText("Here are the most suitable job offers according to your own interests\n");
     		this.txtResult.appendText(j+"\n\n");
     	}
     }
@@ -123,7 +124,6 @@ public class FXMLController {
     		this.resultUniversitiesTxt.appendText("You didn't select any language\n");
     		return;
     	}
-    	//this.resultUniversitiesTxt.appendText("There are "+this.model.getValidUniversitiesNumber(language)+" universities that respect the language criteria\n");
     	Job jobOnOffer = this.boxJobOnOffer.getValue();
     	
     	List<University> bestUniversities = new LinkedList<>();
@@ -133,8 +133,9 @@ public class FXMLController {
         		this.resultUniversitiesTxt.appendText("You didn't select a main subject\n");
         		return;
         	}
-    		bestUniversities = this.model.getBestUniversities(language, subject, (int)artsAndHumanitiesSlider.getValue(), (int)engineeringAndTechnologySlider.getValue(), 
-					(int)lifeSciencesAndMedicineSlider.getValue(), (int)naturalSciencesSlider.getValue(), (int)socialSciencesAndManagementSlider.getValue());
+    		bestUniversities = this.model.getBestUniversities(language, subject, (int)artsAndHumanitiesSlider.getValue(), 
+    				(int)engineeringAndTechnologySlider.getValue(), (int)lifeSciencesAndMedicineSlider.getValue(), (int)naturalSciencesSlider.getValue(), 
+    				(int)socialSciencesAndManagementSlider.getValue());
     		
     	}else {
     		bestUniversities = this.model.getBestUniversities(jobOnOffer, language);
@@ -143,7 +144,7 @@ public class FXMLController {
     	if(bestUniversities==null) {
     		this.resultUniversitiesTxt.appendText("Oh no! Something went wrong\n");
     	}else {
-    		this.resultUniversitiesTxt.appendText("Here are the best 5 universities that will provide suitable candidates for the position you are offering:\n");
+    		this.resultUniversitiesTxt.appendText("Here are the best 5 universities that will provide suitable candidates for the position you are offering:\n\n");
     		for(University u : bestUniversities) {
         		this.resultUniversitiesTxt.appendText(u.toStringRes()+"\n");
         	}
