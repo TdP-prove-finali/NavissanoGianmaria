@@ -1,8 +1,8 @@
-Gianmaria Navissano
+# Gianmaria Navissano
 
-Tool per job placement
+## Tool per job placement
 
-Instruzioni per l'installazione e l'utilizzo
+### Instruzioni per l'installazione e l'utilizzo
 
 1. Forkare il repository del progetto ( URI: https://github.com/TdP-prove-finali/NavissanoGianmaria);
 2. Importare il progetto nel proprio editor (ad esempio Eclipse);
